@@ -25,7 +25,7 @@ jobs:
         run: |
           npm install
 
-      # Step 4: Deploy to EC2 instance via SSH
+      # Step 4: Deploy to EC2 instance via SSH 
       - name: Deploy to AWS EC2
         uses: appleboy/ssh-action@v0.1.6
         with:
