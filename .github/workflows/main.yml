@@ -26,7 +26,7 @@ jobs:
         run: |
           apt update
           apt install -y maven
-          mvn clean install
+          C:\Users\Mohammed\Downloads\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin\mvn clean install
           
   deploy:
     name: Deploy with Ansible
