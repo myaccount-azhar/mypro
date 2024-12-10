@@ -1,0 +1,54 @@
+---
+name: CI/CD Pipeline
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  build:
+    name: Build and Test
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Java (if applicable)
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: temurin
+          
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y maven
+          mvn clean install
+          
+  deploy:
+    name: Deploy with Ansible
+    runs-on: self-hosted
+    needs: build
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+          
+      - name: Configure SSH
+        run: >
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ec2-54-87-51-179.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+          
+      - name: Run Ansible Playbook
+        run: |
+          ansible-playbook -i inventory.yml deploy.yml
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
