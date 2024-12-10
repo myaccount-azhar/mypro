@@ -1,0 +1,5 @@
+all:
+  hosts:
+    target-server.com:
+      ansible_host: ec2-54-87-51-179.compute-1.amazonaws.com
+      ansible_user: ubuntu
