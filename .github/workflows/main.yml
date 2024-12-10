@@ -24,8 +24,6 @@ jobs:
           
       - name: Install Dependencies
         run: |
-          apt update
-          apt install -y maven
           C:\Users\Mohammed\Downloads\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin\mvn clean install
           
   deploy:
