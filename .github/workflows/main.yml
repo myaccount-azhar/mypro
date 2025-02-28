@@ -38,7 +38,7 @@ jobs:
           set-safe-directory: false
                   
       - name: Configure SSH (Windows)
-        shell: pwsh
+        shell: powershell
         run: |
           New-Item -ItemType Directory -Path "$env:USERPROFILE\.ssh" -Force
           "${{ secrets.SSH_PRIVATE_KEY }}" | Set-Content -Path "$env:USERPROFILE\.ssh\id_rsa"
