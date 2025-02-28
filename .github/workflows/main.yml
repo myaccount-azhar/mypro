@@ -13,9 +13,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          set-safe-directory: false
-        
+                
       - name: Setup Java (if applicable)
         uses: actions/setup-java@v3
         with:
@@ -34,9 +32,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          set-safe-directory: false
-          
+                  
       - name: Configure SSH
         run: >
           New-Item -ItemType Directory -Path $HOME\.ssh -Force
